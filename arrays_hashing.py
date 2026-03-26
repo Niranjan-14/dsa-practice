@@ -80,3 +80,26 @@ def groupAnagrams(words):
     
     return list(groups.values())  
 
+
+# ===============================
+# Date: 26 Mar 2026
+# Problem: Top K Frequent Elements
+# Pattern: HashMap + Sort
+# ===============================
+
+def topKFrequent(nums, k):
+    counts = {}
+    
+    for num in nums:
+        if num in counts:
+            counts[num] = counts[num] + 1
+        else:
+            counts[num] = 1
+    
+    sorted_counts = sorted(counts.items(), key=lambda x: x[1], reverse=True)
+    
+    result = []
+    for i in range(k):
+        result.append(sorted_counts[i][0])
+    
+    return result
