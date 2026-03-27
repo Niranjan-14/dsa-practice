@@ -103,3 +103,30 @@ def topKFrequent(nums, k):
         result.append(sorted_counts[i][0])
     
     return result
+
+# ===============================
+# Date: 27 Mar 2026 
+# Problem: Product of Array Except Self 
+# Pattern: Prefix + Suffix products
+# ===============================
+
+
+def productExceptSelf(nums):
+    n = len(nums)
+    
+    # Build prefix
+    prefix = [1] * n
+    for i in range(1, n):
+        prefix[i] = prefix[i-1] * nums[i-1]
+    
+    # Build suffix
+    suffix = [1] * n
+    for i in range(n-2, -1, -1):
+        suffix[i] = suffix[i+1] * nums[i+1]
+    
+    # Build output
+    result = []
+    for i in range(n):
+        result.append(prefix[i] * suffix[i])
+    
+    return result
