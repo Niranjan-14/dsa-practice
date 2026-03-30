@@ -130,3 +130,36 @@ def productExceptSelf(nums):
         result.append(prefix[i] * suffix[i])
     
     return result
+
+
+# ===============================
+# Date: 30 Mar 2026 
+# Problem: Valid Sudoku 
+# Pattern: 3 lists of 9 sets (rows, cols, boxes)
+# ===============================
+
+def isValidSudoku(self, board):
+    rows = [set() for i in range(9)]
+    cols = [set() for i in range(9)]
+    boxes = [set() for i in range(9)]
+    
+    for row in range(9):
+        for col in range(9):
+            val = board[row][col]
+            if val == ".":
+                continue
+            box_number = (row // 3) * 3 + (col // 3)
+            if val in rows[row]:
+                return False
+            else:
+                rows[row].add(val)
+            if val in cols[col]:
+                return False
+            else:
+                cols[col].add(val)
+            if val in boxes[box_number]:
+                return False
+            else:
+                boxes[box_number].add(val)
+    return True
+
