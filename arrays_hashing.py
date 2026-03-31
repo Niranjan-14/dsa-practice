@@ -163,3 +163,30 @@ def isValidSudoku(self, board):
                 boxes[box_number].add(val)
     return True
 
+# ==========================================================
+# Date: 31 Mar 2026
+# Problem: Encode/Decode Strings
+# Pattern: Length prefix encoding
+# Key insight: {length}#{string} — decoder reads 
+#              length first, then exactly that many chars
+#              No delimiter needed — length guides the read
+# =========================================================
+
+class Solution:
+
+    def encode(self, strs: List[str]) -> str:
+        encode_string = ""
+        for word in strs:
+            encode_string += str(len(word)) + "#" + word
+        return encode_string
+
+    def decode(self, s: str) -> List[str]:
+        result = []
+        i = 0
+        while i < len(s):
+            j = s.index("#", i)
+            length = int(s[i:j])
+            word = s[j+1 : j+1+length]
+            i = j + 1 + length
+            result.append(word)
+        return result
