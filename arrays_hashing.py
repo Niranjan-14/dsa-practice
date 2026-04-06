@@ -190,3 +190,75 @@ class Solution:
             i = j + 1 + length
             result.append(word)
         return result
+
+# ==========================================================
+# Date: 1 Apr 2026
+# Problem: Longest Consecutive Sequence
+# Pattern: HashSet + sequence start detection
+# Key insight: n is a start if n-1 not in set
+#              then count upward using current+1
+#              track max with longest = max(longest, length)
+# ==========================================================
+
+class Solution:
+    def longestConsecutive(self, nums: List[int]) -> int:      
+        nums = set(nums)
+        longest = 0
+        for num in nums:
+            if num - 1 not in nums:
+                length = 1
+                current = num
+                while current + 1 in nums:
+                    length += 1
+                    current += 1
+                longest = max(longest, length)
+        return longest
+
+# ====================================================================
+# Date: 2 Apr 2026
+# Problem: Valid Palindrome
+# Pattern: Two Pointers
+# Key insight: Clean string first (isalnum + lower)
+#              Left pointer from start, right from end
+#              Move inward while l < r
+#              If mismatch → return False
+# ====================================================================
+
+
+def isPalindrome(self, s: str) -> bool:
+    out = ""
+    for i in s:
+        if i.isalnum():
+            out += i.lower()
+
+    l = 0
+    r = len(out) - 1
+    while l < r:
+        if out[l] != out[r]:
+            return False
+        l += 1
+        r -= 1
+    return True
+
+
+# ================================================
+# Date: 3 Apr 2026
+# Problem: Two Sum II
+# Pattern: Two Pointers on sorted array
+# Key insight: Sorted array → move left pointer if sum too small
+#              move right pointer if sum too big
+#              Return 1-indexed result
+# ================================================
+
+class Solution:
+    def twoSum(self, numbers: List[int], target: int) -> List[int]:
+            l = 0
+            r = len(numbers) - 1
+            while l < r:
+                total = numbers[l] + numbers[r]
+                if total > target:
+                    r -= 1
+                elif total < target:
+                    l += 1
+                else:
+                    return [l+1, r+1]
