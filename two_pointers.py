@@ -99,3 +99,29 @@ class Solution:
             else:
                 right -= 1
         return max_area
+
+# ================================================
+# Date: 8 Apr 2026
+# Problem: Trapping Rain Water
+# Pattern: Precomputed left_max + right_max arrays
+# Solved alone? No — guided
+# ================================================
+
+class Solution:
+    def trap(self, height: List[int]) -> int:
+        left_max = [0]
+        right_max = [0] * len(height)
+
+        for i in range(1, len(height)):
+            left_max.append(max(left_max[-1], height[i-1]))
+
+
+        for i in range(len(height)-2, -1, -1):
+            right_max[i] = max(right_max[i+1], height[i+1])
+
+        water_at_i = [0] * len(height)
+
+        for i in range(len(height)):
+            area = min(left_max[i], right_max[i]) - height[i]
+            water_at_i[i] = max(0, area)
+        return sum(water_at_i)
