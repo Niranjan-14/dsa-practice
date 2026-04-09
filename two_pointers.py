@@ -125,4 +125,3 @@ class Solution:
             area = min(left_max[i], right_max[i]) - height[i]
             water_at_i[i] = max(0, area)
         return sum(water_at_i)
-    
